@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  web:
+    image: nginx:alpine
+    container_name: task-compose-web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/usr/share/nginx/html
+
+  api:
+    image: node:18-alpine
+    container_name: task-compose-api
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    command: node index.js
+    ports:
+      - "3000:3000"
